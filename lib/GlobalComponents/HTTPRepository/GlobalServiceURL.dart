@@ -3,7 +3,8 @@ class GlobalServiceURL {
   //----------------------------Authorization-URL-------------------------------//
   //static String BaseURL = "https://backendapi-mobile.ibaptech.sbs/api/v2/mobile/";
 
-  static String BaseURL = "https://water.bookmydraws.com/api/";
+  //static String BaseURL = "https://water.bookmydraws.com/api/";
+  static String BaseURL = "https://admin.amritmineralwater.in/api/";
   static String ImageBaseURL = "https://water.bookmydraws.com/";
   static String ProductNoImgURL =
       "https://tinasbotanicals.com/wp-content/uploads/2025/01/No-Product-Image-Available.png";
