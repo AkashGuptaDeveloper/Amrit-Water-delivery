@@ -253,6 +253,14 @@ class GlobalFunction {
                             "Delivery Partner registered successfully") {
                           Navigator.pop(context);
                           Navigator.pop(context);
+                        }
+                        //Password updated successfully
+                        else if (btnValue == "Password updated successfully") {
+                          Navigator.pop(context);
+                          GlobalFunction().navigateToScreen(
+                            context,
+                            const LoginScreen(),
+                          );
                         } else {
                           Navigator.pop(context);
                         }
