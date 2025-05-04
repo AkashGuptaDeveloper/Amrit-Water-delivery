@@ -18,6 +18,8 @@ class GlobalServiceURL {
   static String UpdateOrderStatusUrl =
       "${BaseURL}delivery-partner/update-order-status";
   static String GetOrderUrl = "${BaseURL}delivery-partner/get-order-history";
+  static String ResetPasswordUrl =
+      "${BaseURL}delivery-partner/update-password/";
 }
 
 //======================================END===================================//

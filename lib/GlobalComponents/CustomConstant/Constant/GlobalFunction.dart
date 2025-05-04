@@ -13,6 +13,7 @@ class GlobalFunction {
     {"Title": "Order History", "Icon": FontAwesomeIcons.shoppingCart},
     {"Title": "Contact Us", "Icon": CupertinoIcons.headphones},
     {"Title": "Share", "Icon": FontAwesomeIcons.shareFromSquare},
+    {"Title": "Reset Password", "Icon": FontAwesomeIcons.key},
     {"Title": "Log Out", "Icon": Icons.logout_outlined},
   ];
   //--------------------------------PortraitMode--------------------------------//

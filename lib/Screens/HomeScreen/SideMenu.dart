@@ -193,6 +193,9 @@ class SideDrawerScreenState extends State<SideDrawerScreen>
       }
       if (index == 3) {
         Navigator.of(context).pop();
+      }
+      if (index == 4) {
+        Navigator.of(context).pop();
         GlobalFunction().NormalMessageWithTwoButtonAlert(
           context,
           "Logout",

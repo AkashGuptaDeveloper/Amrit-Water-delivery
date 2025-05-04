@@ -7,8 +7,8 @@ plugins {
 
 android {
     namespace = "com.app.amritwaterdelivery"
-    compileSdkVersion 35
-    ndkVersion = flutter.ndkVersion
+    compileSdk = flutter.compileSdkVersion
+    ndkVersion = "27.0.12077973"
     lintOptions {
         disable 'InvalidPackage', 'Instantiatable'
         checkReleaseBuilds false

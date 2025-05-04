@@ -51,5 +51,6 @@ String OrderListService = GlobalServiceURL.OrderListUrl.toString();
 String UpdateOrderStatusService =
     GlobalServiceURL.UpdateOrderStatusUrl.toString();
 String GetOrderService = GlobalServiceURL.GetOrderUrl.toString();
+String ResetPasswordService = GlobalServiceURL.ResetPasswordUrl.toString();
 
 //======================================END===================================//
