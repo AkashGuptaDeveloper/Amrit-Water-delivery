@@ -2,7 +2,6 @@
 import 'dart:ui';
 
 import 'package:amritwaterdelivery/GlobalComponents/HTTPRepository/Packages.dart';
-import 'package:amritwaterdelivery/Screens/OrderHistory/OrderHistoryController.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -38,6 +37,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => RegisterProvider()),
         ChangeNotifierProvider(create: (context) => HomeProvider()),
         ChangeNotifierProvider(create: (context) => OrderHistoryProvider()),
+        ChangeNotifierProvider(create: (context) => ResetPasswordProvider()),
       ],
       child: MaterialApp(
         builder:

@@ -26,6 +26,8 @@ export 'package:amritwaterdelivery/Screens/HomeScreen/HomeScreen.dart';
 export 'package:amritwaterdelivery/Screens/HomeScreen/OrderDetails.dart';
 export 'package:amritwaterdelivery/Screens/HomeScreen/SideMenu.dart';
 export 'package:amritwaterdelivery/Screens/OrderHistory/OrderHistory.dart';
+export 'package:amritwaterdelivery/Screens/OrderHistory/OrderHistoryController.dart';
+export 'package:amritwaterdelivery/Screens/ResetPassword/ResetPasswordController.dart';
 export 'package:amritwaterdelivery/Screens/SplashScreen/SplashScreen.dart';
 export 'package:animate_do/animate_do.dart';
 export 'package:cached_network_image/cached_network_image.dart';
