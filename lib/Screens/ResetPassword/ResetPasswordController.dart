@@ -3,9 +3,6 @@ import 'package:amritwaterdelivery/GlobalComponents/HTTPRepository/Packages.dart
 
 //--🟢ResetPasswordProvider-------🟢------------------------------------------//
 class ResetPasswordProvider with ChangeNotifier {
-  final TextEditingController OldPwdController = TextEditingController();
-  final FocusNode myFocusOldPwd = FocusNode();
-
   final TextEditingController NewPwdController = TextEditingController();
   final FocusNode myFocusNewPwd = FocusNode();
 
@@ -26,16 +23,6 @@ class ResetPasswordProvider with ChangeNotifier {
 
   //✅------------------------------------------------------------------------✅//
   void validateAndSubmit(BuildContext context) async {
-    if (OldPwdController.text.isEmpty) {
-      GlobalFunction().PopupFailedAlert(
-        context,
-        "Failed",
-        "",
-        "Enter Current Password",
-      );
-      return;
-    }
-
     if (NewPwdController.text.isEmpty) {
       GlobalFunction().PopupFailedAlert(
         context,
@@ -78,7 +65,6 @@ class ResetPasswordProvider with ChangeNotifier {
     );
     // Prepare request body
     final body = {
-      'old_password': OldPwdController.text.toString(),
       'password': NewPwdController.text.toString().trim(),
       'password_confirmation': ConfirmPwdController.text.toString().trim(),
     };
@@ -125,10 +111,8 @@ class ResetPasswordProvider with ChangeNotifier {
 
   //--🔹--clearFields----------------------------------------------------🔹--//
   void clearFields(context) {
-    OldPwdController.clear();
     NewPwdController.clear();
     ConfirmPwdController.clear();
-    myFocusOldPwd.unfocus();
     myFocusNewPwd.unfocus();
     myFocusConfirmPwd.unfocus();
     GlobalResetPasswordLoader = false;

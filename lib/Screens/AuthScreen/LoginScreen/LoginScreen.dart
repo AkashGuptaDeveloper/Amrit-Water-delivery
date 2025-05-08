@@ -160,6 +160,27 @@ class LoginScreenState extends State<LoginScreen>
                                 buttonText: "Login",
                                 loaderKey: GlobalFunction().LoaderKey,
                               ),
+                              const SizedBox(height: 5),
+                              GestureDetector(
+                                onTap: () {
+                                  GlobalFunction().navigateToScreen(
+                                    context,
+                                    const ResetPasswordScreen(),
+                                  );
+                                },
+                                child: Align(
+                                  alignment: Alignment.centerRight,
+                                  child: Text(
+                                    'Forgot Password',
+                                    style: GlobalDecorations.CommanTextStyle(
+                                      context,
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 17,
+                                      color: GlobalAppColor.ButtonColor,
+                                    ),
+                                  ),
+                                ),
+                              ),
                             ],
                           ),
                         ),

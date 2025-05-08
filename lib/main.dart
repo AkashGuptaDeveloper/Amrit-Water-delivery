@@ -1,4 +1,4 @@
-// ignore_for_file: file_names, non_constant_identifier_names, use_build_context_synchronously, depend_on_referenced_packages, unnecessary_null_comparison, avoid_function_literals_in_foreach_call
+// ignore_for_file: file_names, non_constant_identifier_names, use_build_context_synchronously, deprecated_member_use, await_only_futures, unnecessary_null_comparison, unused_local_variable
 import 'dart:ui';
 
 import 'package:amritwaterdelivery/GlobalComponents/HTTPRepository/Packages.dart';
@@ -43,17 +43,25 @@ class MyApp extends StatelessWidget {
         builder:
             (context, child) => ResponsiveBreakpoints.builder(
               breakpoints: [
-                const Breakpoint(start: 0, end: 450, name: MOBILE),
-                const Breakpoint(start: 451, end: 800, name: TABLET),
-                const Breakpoint(start: 801, end: 1920, name: DESKTOP),
-                const Breakpoint(start: 1921, end: double.infinity, name: '4K'),
+                Breakpoint(start: 0, end: 450, name: MOBILE), // Mobile
+                Breakpoint(start: 451, end: 800, name: TABLET), // Tablet
+                Breakpoint(start: 801, end: 1920, name: DESKTOP), // Desktop
+                Breakpoint(start: 1921, end: double.infinity, name: '4K'),
               ],
-              child: child!,
+              child: Builder(
+                builder: (context) {
+                  return MediaQuery(
+                    data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
+                    child: child!,
+                  );
+                },
+              ),
             ),
+        useInheritedMediaQuery: true,
         scrollBehavior: MyCustomScrollBehavior(),
         theme: ThemeData(visualDensity: VisualDensity.adaptivePlatformDensity),
         debugShowCheckedModeBanner: false,
-        home: const SplashScreen(),
+        home: SplashScreen(),
       ),
     );
   }
