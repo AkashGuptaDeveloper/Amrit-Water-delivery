@@ -145,6 +145,18 @@ class ResetPasswordScreenState extends State<ResetPasswordScreen>
                           spacing: 20,
                           children: <Widget>[
                             GlobalDecorations.globalCupertinoTextField(
+                              duration: Duration(milliseconds: 800),
+                              context: context,
+                              controller:
+                                  GetResetPasswordData.UserNameController,
+                              focusNode: GetResetPasswordData.myFocusUserName,
+                              keyboardType: TextInputType.text,
+                              textInputAction: TextInputAction.done,
+                              placeholder: 'Enter UserName',
+                              enabled:
+                                  !GetResetPasswordData.loadingResetPassword,
+                            ),
+                            GlobalDecorations.globalCupertinoTextField(
                               duration: Duration(milliseconds: 1000),
                               context: context,
                               controller: GetResetPasswordData.NewPwdController,

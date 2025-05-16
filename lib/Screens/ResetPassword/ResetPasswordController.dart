@@ -1,8 +1,12 @@
 // ignore_for_file: file_names, non_constant_identifier_names, use_build_context_synchronously, depend_on_referenced_packages, unnecessary_null_comparison, avoid_function_literals_in_foreach_calls
 import 'package:amritwaterdelivery/GlobalComponents/HTTPRepository/Packages.dart';
+import 'package:http/http.dart' as http;
 
 //--🟢ResetPasswordProvider-------🟢------------------------------------------//
 class ResetPasswordProvider with ChangeNotifier {
+  final TextEditingController UserNameController = TextEditingController();
+  final FocusNode myFocusUserName = FocusNode();
+
   final TextEditingController NewPwdController = TextEditingController();
   final FocusNode myFocusNewPwd = FocusNode();
 
@@ -23,6 +27,15 @@ class ResetPasswordProvider with ChangeNotifier {
 
   //✅------------------------------------------------------------------------✅//
   void validateAndSubmit(BuildContext context) async {
+    if (UserNameController.text.isEmpty) {
+      GlobalFunction().PopupFailedAlert(
+        context,
+        "Failed",
+        "",
+        "Enter New UserName",
+      );
+      return;
+    }
     if (NewPwdController.text.isEmpty) {
       GlobalFunction().PopupFailedAlert(
         context,
@@ -56,47 +69,47 @@ class ResetPasswordProvider with ChangeNotifier {
     }
   }
 
-  //✅------------------------------------------------------------------------✅//
+  //✅--------------------------------------------------------------------✅//
   Future<void> UserResetPasswordService({required BuildContext context}) async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    final HttpService httpService = HttpService();
-    final uri = Uri.parse(
-      "$ResetPasswordService${prefs.getInt("UserLoginID")}",
-    );
-    // Prepare request body
-    final body = {
-      'password': NewPwdController.text.toString().trim(),
-      'password_confirmation': ConfirmPwdController.text.toString().trim(),
-    };
-    final headers = {
-      'Content-Type': 'application/json',
-      'Accept': 'application/json',
-      'Authorization': 'Bearer ${prefs.getString("UserLoginToken")}',
-    };
     try {
       setResetPasswordLoading(true);
-      final response = await httpService.Request(
-        method: 'POST',
-        url: uri.toString(),
-        body: body,
-        headers: headers,
-        context: context,
+
+      var request = http.MultipartRequest(
+        'POST',
+        Uri.parse(GlobalServiceURL.ResetPasswordUrl),
       );
-      if (response != null && response["status"] == true) {
+
+      request.fields.addAll({
+        'username': UserNameController.text.toString().trim(),
+        'password': NewPwdController.text.toString().trim(),
+        'password_confirmation': ConfirmPwdController.text.toString().trim(),
+      });
+
+      http.StreamedResponse streamedResponse = await request.send();
+      final String responseBody = await streamedResponse.stream.bytesToString();
+
+      if (kDebugMode) {
+        print("Raw response: $responseBody");
+      }
+
+      final decodedResponse = jsonDecode(responseBody);
+
+      if (streamedResponse.statusCode == 200 &&
+          decodedResponse["status"] == true) {
         GlobalFunction().PopupFailedAlert(
           context,
           "Success",
           "Password updated successfully",
-          response['message'].toString(),
+          decodedResponse['message']?.toString() ?? '',
         );
       } else {
-        GlobalFunction().PopupFailedAlert(
-          context,
-          "Failed",
-          "",
-          response['message'].toString(),
-        );
+        String errorMessage =
+            decodedResponse['message']?.toString() ??
+            decodedResponse.values.first.toString(); // fallback
+
+        GlobalFunction().PopupFailedAlert(context, "Failed", "", errorMessage);
       }
+
       setResetPasswordLoading(false);
       notifyListeners();
     } catch (e) {
@@ -111,6 +124,8 @@ class ResetPasswordProvider with ChangeNotifier {
 
   //--🔹--clearFields----------------------------------------------------🔹--//
   void clearFields(context) {
+    UserNameController.clear();
+    myFocusUserName.unfocus();
     NewPwdController.clear();
     ConfirmPwdController.clear();
     myFocusNewPwd.unfocus();
